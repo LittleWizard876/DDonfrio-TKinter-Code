@@ -1,9 +1,67 @@
 import tkinter as tk
+from tkinter import Toplevel
+
+def save_main_window_data():
+    data = {
+        "text_box1": text_box1.get(),
+        "text_box2": text_box2.get(),
+        "text_box3": text_box3.get(),
+        "text_box4": text_box4.get(),
+    }
+    with open("main_window_data.txt", "w") as file:
+        for key, value in data.items():
+            file.write(f"{key}: {value}\n")
+    print("Main Window Data saved to main_window_data.txt")
+
+def save_second_window_data():
+    data = {
+        "text_box1": second_text_box1.get(),
+        "text_box2": second_text_box2.get(),
+        "text_box3": second_text_box3.get(),
+        "text_box4": second_text_box4.get(),
+    }
+    with open("second_window_data.txt", "w") as file:
+        for key, value in data.items():
+            file.write(f"{key}: {value}\n")
+    print("Second Window Data saved to second_window_data.txt")
+
+def open_second_window():
+    global second_text_box1, second_text_box2, second_text_box3, second_text_box4
+
+    second_window = Toplevel(root)
+    second_window.title("Continued Census")
+    second_window.geometry("400x322")
+
+    label1 = tk.Label(second_window, text="Question 5")
+    label1.grid(row=0, column=0, padx=10, pady=5)
+
+    second_text_box1 = tk.Entry(second_window)
+    second_text_box1.grid(row=0, column=1, padx=10, pady=5)
+
+    label2 = tk.Label(second_window, text="Question 6")
+    label2.grid(row=1, column=0, padx=10, pady=5)
+
+    second_text_box2 = tk.Entry(second_window)
+    second_text_box2.grid(row=1, column=1, padx=10, pady=5)
+
+    label3 = tk.Label(second_window, text="Question 7")
+    label3.grid(row=2, column=0, padx=10, pady=5)
+
+    second_text_box3 = tk.Entry(second_window)
+    second_text_box3.grid(row=2, column=1, padx=10, pady=5)
+
+    label4 = tk.Label(second_window, text="Question 8")
+    label4.grid(row=3, column=0, padx=10, pady=5)
+
+    second_text_box4 = tk.Entry(second_window)
+    second_text_box4.grid(row=3, column=1, padx=10, pady=5)
+
+    save_button = tk.Button(second_window, text="Save", command=save_second_window_data)
+    save_button.grid(row=4, column=0, columnspan=2, pady=10)
+
 
 root = tk.Tk()
-
 root.title("Census Window")
-
 root.geometry("400x322")
 
 label1 = tk.Label(root, text="Question 1")
@@ -29,5 +87,11 @@ label4.grid(row=3, column=0, padx=10, pady=5)
 
 text_box4 = tk.Entry(root)
 text_box4.grid(row=3, column=1, padx=10, pady=5)
+
+save_button = tk.Button(root, text="Save", command=save_main_window_data)
+save_button.grid(row=4, column=0, columnspan=2, pady=10)
+
+open_button = tk.Button(root, text="Next", command=open_second_window)
+open_button.grid(row=5, column=0, columnspan=2, pady=10)
 
 root.mainloop()
