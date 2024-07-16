@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import Toplevel
+from tkinter import PhotoImage
+
 
 def save_main_window_data():
     data = {
@@ -13,6 +15,7 @@ def save_main_window_data():
             file.write(f"{key}: {value}\n")
     print("Main Window Data saved to main_window_data.txt")
 
+
 def save_second_window_data():
     data = {
         "text_box1": second_text_box1.get(),
@@ -25,8 +28,9 @@ def save_second_window_data():
             file.write(f"{key}: {value}\n")
     print("Second Window Data saved to second_window_data.txt")
 
+
 def open_second_window():
-    global second_text_box1, second_text_box2, second_text_box3, second_text_box4
+    global second_window, second_text_box1, second_text_box2, second_text_box3, second_text_box4
 
     second_window = Toplevel(root)
     second_window.title("Continued Census")
@@ -57,12 +61,21 @@ def open_second_window():
     second_text_box4.grid(row=3, column=1, padx=10, pady=5)
 
     save_button = tk.Button(second_window, text="Save", command=save_second_window_data)
-    save_button.grid(row=4, column=0, columnspan=2, pady=10)
+    save_button.grid(row=4, column=0, padx=5, pady=10)
+
+    exit_button = tk.Button(second_window, text="Exit", command=exit_application)
+    exit_button.grid(row=4, column=1, padx=5, pady=10)
+
+
+def exit_application():
+    root.destroy()
+    if 'second_window' in globals():
+        second_window.destroy()
 
 
 root = tk.Tk()
 root.title("Census Window")
-root.geometry("400x322")
+root.geometry("600x322")
 
 label1 = tk.Label(root, text="Question 1")
 label1.grid(row=0, column=0, padx=10, pady=5)
@@ -89,9 +102,16 @@ text_box4 = tk.Entry(root)
 text_box4.grid(row=3, column=1, padx=10, pady=5)
 
 save_button = tk.Button(root, text="Save", command=save_main_window_data)
-save_button.grid(row=4, column=0, columnspan=2, pady=10)
+save_button.grid(row=4, column=0, padx=5, pady=10)
 
 open_button = tk.Button(root, text="Next", command=open_second_window)
-open_button.grid(row=5, column=0, columnspan=2, pady=10)
+open_button.grid(row=4, column=1, padx=5, pady=10)
+
+exit_button = tk.Button(root, text="Exit", command=exit_application)
+exit_button.grid(row=6, column=2, padx=5, pady=10)
+
+image = PhotoImage(file=r"C:\Users\Milo\PycharmProjects\Screenshot 2024-07-15 201504.png")
+image_label = tk.Label(root, image=image)
+image_label.grid(row=0, column=2, rowspan=5, padx=10, pady=5)
 
 root.mainloop()
