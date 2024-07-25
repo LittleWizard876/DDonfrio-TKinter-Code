@@ -1,0 +1,9 @@
+Open the application by clicking on the py or take the code and put it in your IDE
+You will be given 4 text boxes with 7 buttons and 1 image
+the boxes question 1-4 are clickable and show the question you need to answer in the box next to it
+once you finish answering those questions click save then Next
+the second window follows the same logic 
+fill in the boxes with answers for the questions
+Click Save once finished then Exit
+
+The data you typed in will be saved to a txt in the py location or if you moved the code to the code library you are running the code from.
