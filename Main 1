@@ -82,7 +82,7 @@ def open_second_window():
     second_window.geometry("600x322")
 
     try:
-        image = PhotoImage(file=r"C:\Users\Milo\Desktop\Screenshot 2024-07-25 091201.png")
+        image = PhotoImage(file=r"C:\Users\Milo\Desktop\Image 2")
         image_label = tk.Label(second_window, image=image)
         image_label.image = image
         image_label.grid(row=0, column=2, rowspan=5, padx=10, pady=5)
@@ -136,7 +136,7 @@ open_button.grid(row=4, column=1, padx=5, pady=10)
 exit_button = tk.Button(root, text="Exit", command=exit_application)
 exit_button.grid(row=6, column=2, padx=20, pady=30)
 
-image = PhotoImage(file=r"C:\Users\Milo\PycharmProjects\Screenshot 2024-07-15 201504.png")
+image = PhotoImage(file=r"C:\Users\Milo\Desktop\Image 1.png")
 image_label = tk.Label(root, image=image)
 image_label.grid(row=0, column=2, rowspan=5, padx=10, pady=5)
 
