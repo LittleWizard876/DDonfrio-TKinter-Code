@@ -1,3 +1,4 @@
+import re
 import tkinter as tk
 from tkinter import Toplevel, PhotoImage, messagebox
 
@@ -17,16 +18,23 @@ def show_question_info(question_text):
     close_button = tk.Button(info_window, text="Close", command=info_window.destroy)
     close_button.pack(pady=5)
 
+def clean_input(input_text):
+   
+    return re.sub(r'[^a-zA-Z0-9]', '', input_text)
+
 def validate_inputs(entries):
     for entry in entries:
-        if entry.get().strip() == "":
+        cleaned_text = clean_input(entry.get())
+        entry.delete(0, tk.END)
+        entry.insert(0, cleaned_text)
+        if cleaned_text.strip() == "":
             return False
     return True
 
 def save_main_window_data():
     entries = [text_box1, text_box2, text_box3, text_box4]
     if not validate_inputs(entries):
-        messagebox.showwarning("Validation Error", "Please fill in all fields before saving.")
+        messagebox.showwarning("Validation Error", "Please fill in all fields with valid characters before saving.")
         return
 
     data = {
@@ -43,7 +51,7 @@ def save_main_window_data():
 def save_second_window_data():
     entries = [second_text_box1, second_text_box2, second_text_box3, second_text_box4]
     if not validate_inputs(entries):
-        messagebox.showwarning("Validation Error", "Please fill in all fields before saving.")
+        messagebox.showwarning("Validation Error", "Please fill in all fields with valid characters before saving.")
         return
 
     data = {
@@ -62,13 +70,12 @@ def open_second_window():
 
     second_window = Toplevel(root)
     second_window.title("Continued Census")
-    second_window.geometry("600x322")  # Adjust size if needed
+    second_window.geometry("600x322")
 
-    # Load and display the image
     try:
         image = PhotoImage(file=r"C:\Users\Milo\Desktop\Screenshot 2024-07-25 091201.png")
         image_label = tk.Label(second_window, image=image)
-        image_label.image = image  
+        image_label.image = image
         image_label.grid(row=0, column=2, rowspan=5, padx=10, pady=5)
     except Exception as e:
         print(f"Error loading image: {e}")
@@ -89,6 +96,7 @@ def open_second_window():
 
     exit_button = tk.Button(second_window, text="Exit", command=exit_application)
     exit_button.grid(row=4, column=1, padx=5, pady=10)
+
 def exit_application():
     root.destroy()
     if 'second_window' in globals():
