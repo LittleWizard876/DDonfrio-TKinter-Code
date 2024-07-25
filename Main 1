@@ -2,11 +2,15 @@ import re
 import tkinter as tk
 from tkinter import Toplevel, PhotoImage, messagebox
 
+#this is the abbreviation length
 MAX_LENGTH = 10
 
+#abbreviate text shortens the words used in question buttons so that i don't over display onto the text boxes.
+#it also makes calling on the same text easier since it is the only text used for the question box in question.
 def abbreviate_text(text, max_length):
     return text if len(text) <= max_length else text[:max_length] + '...'
 
+#show question info shows you text for the button you clicked on question 1-8
 def show_question_info(question_text):
     info_window = Toplevel(root)
     info_window.title("Question Information")
@@ -18,10 +22,12 @@ def show_question_info(question_text):
     close_button = tk.Button(info_window, text="Close", command=info_window.destroy)
     close_button.pack(pady=5)
 
+#clean input checks for symbols
 def clean_input(input_text):
-   
+
     return re.sub(r'[^a-zA-Z0-9]', '', input_text)
 
+#Validate inputs checks for empty boxes
 def validate_inputs(entries):
     for entry in entries:
         cleaned_text = clean_input(entry.get())
@@ -31,6 +37,7 @@ def validate_inputs(entries):
             return False
     return True
 
+#def save main window will define what the save button on the main window does
 def save_main_window_data():
     entries = [text_box1, text_box2, text_box3, text_box4]
     if not validate_inputs(entries):
@@ -48,6 +55,7 @@ def save_main_window_data():
             file.write(f"{key}: {value}\n")
     print("Main Window Data saved to main_window_data.txt")
 
+#def save second window will define what the save button on the second window does
 def save_second_window_data():
     entries = [second_text_box1, second_text_box2, second_text_box3, second_text_box4]
     if not validate_inputs(entries):
@@ -65,6 +73,7 @@ def save_second_window_data():
             file.write(f"{key}: {value}\n")
     print("Second Window Data saved to second_window_data.txt")
 
+#Open second window defines what the next button does
 def open_second_window():
     global second_window, second_text_box1, second_text_box2, second_text_box3, second_text_box4
 
@@ -97,6 +106,7 @@ def open_second_window():
     exit_button = tk.Button(second_window, text="Exit", command=exit_application)
     exit_button.grid(row=4, column=1, padx=5, pady=10)
 
+## def exit_app is used to define what the exit will do
 def exit_application():
     root.destroy()
     if 'second_window' in globals():
