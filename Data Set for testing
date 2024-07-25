@@ -1,18 +1,18 @@
-Symbols get removed set
+#Symbols get removed set    #When you use this set all the letters and numbers get squished together and symbols are removed
 
 James S. Carmot
 Forty-Seven
 143 Telco Ave. Wabash, Idaho
 Seven
 
-Empty Set
+#Empty Set #will prompt the user to fill in the blank boxes and won't save until it is filled in
 
 Name
 Age
-
+(leave empty)
 People in household
 
-Valid Set
+#Valid Set   #Works as promised
 
 Karen Green
 28
